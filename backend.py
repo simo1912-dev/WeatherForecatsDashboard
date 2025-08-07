@@ -6,16 +6,13 @@ import requests
 API_KEY = "7a620e8b7044df0aefbdfee6a6591e48"
 
 def get_data(place, forecast_days=None, type=None):
+
     url = f"http://api.openweathermap.org/data/2.5/forecast?q={place}&appid={API_KEY}"
     response = requests.get(url)
     data = response.json()
     filtered_data = data["list"]
     nr_values = 8 * forecast_days
-    filtered_data = filtered_data[nr_values:]
-    if type == "Temperature":
-        filtered_data = [dict["main"]["temp"] for dict in filtered_data]
-    if type == "Sky":
-        filtered_data = [dict["weather"][0]["main"] for dict in filtered_data]
+    filtered_data = filtered_data[:nr_values]
     return filtered_data
 
 if __name__ == "__main__":
