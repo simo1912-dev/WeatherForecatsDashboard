@@ -1,9 +1,10 @@
 from http.client import responses
 
 import requests
+import os
+from dotenv import load_dotenv
 
-
-API_KEY = "7a620e8b7044df0aefbdfee6a6591e48"
+API_KEY = os.getenv("API_KEY")
 
 def get_data(place, forecast_days=None, type=None):
 
